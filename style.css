@@ -1,3 +1,26 @@
+/* =========================================================
+   NASA colors (from the NASA Web Design System)
+   and fonts (from NASA's digital brand guidelines)
+   ========================================================= */
+:root {
+  --nasa-red: #dd361c;        /* buttons and accents */
+  --nasa-red-dark: #c62d1f;   /* button hover */
+  --nasa-blue: #0b3d91;       /* NASA blue */
+  --nasa-blue-bright: #105bd8;
+  --nasa-blue-darkest: #061f4a;
+  --nasa-blue-light: #9bdaf1;
+  --text: #212121;
+  --gray-dark: #323a45;
+  --gray: #5b616b;
+  --gray-light: #d6d7d9;
+  --background: #f1f1f1;
+  --white: #ffffff;
+
+  --font-heading: 'Inter', Helvetica, Arial, sans-serif;
+  --font-body: 'Public Sans', Helvetica, Arial, sans-serif;
+  --font-mono: 'DM Mono', 'Courier New', monospace;
+}
+
 /* Global reset & box sizing */
 * {
   box-sizing: border-box;
@@ -7,107 +30,235 @@
 
 /* Base page styles */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f1f1f1;
-  padding: 20px;
+  font-family: var(--font-body);
+  background-color: var(--background);
+  color: var(--text);
+  line-height: 1.5;
 }
 
 /* Centered container */
 .container {
   max-width: 1200px;
   margin: 0 auto;
-}
-
-/* Header */
-.site-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
-}
-
-h1 {
-  font-family: Verdana, sans-serif;
-  font-weight: bold;
-  color: #212121;
-}
-
-/* Logo */
-.logo {
-  width: 140px;
-  margin-right: 15px;
-}
-
-/* Date‐picker & button row */
-.filters {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  justify-content: center;
-  margin-bottom: 20px;
   padding: 0 20px;
 }
 
-/* Inputs and buttons */
-input[type="date"],
-button {
-  font-family: Arial, sans-serif;
-  font-weight: normal;
-  color: #666;
-  padding: 10px 15px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+/* =========================================================
+   Header
+   (NASA's rules: the red "worm" logo only goes on white or
+   very light backgrounds, so the header stays white)
+   ========================================================= */
+.site-header {
+  background-color: var(--white);
+  border-bottom: 4px solid var(--nasa-red);
+  margin-bottom: 30px;
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.logo {
+  width: 140px;
+}
+
+.header-text {
+  border-left: 2px solid var(--gray-light);
+  padding-left: 20px;
+}
+
+h1 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 28px;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.tagline {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gray);
+  margin-top: 4px;
+}
+
+/* Smaller header on phones */
+@media (max-width: 480px) {
+  .header-inner {
+    gap: 14px;
+  }
+
+  .logo {
+    width: 100px;
+  }
+
+  .header-text {
+    padding-left: 14px;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+}
+
+/* =========================================================
+   Date pickers & button
+   ========================================================= */
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background-color: var(--white);
+  padding: 20px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  margin-bottom: 20px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gray);
+}
+
+input[type="date"] {
+  font-family: var(--font-body);
   font-size: 16px;
-  line-height: 1.4;
+  color: var(--text);
+  padding: 10px 14px;
+  border: 1px solid var(--gray-light);
+  border-radius: 4px;
   width: 100%;
 }
 
-/* Button specific */
-button {
-  background-color: #d3d3d3;
-  color: black;
-  cursor: pointer;
-}
-button:hover {
-  background-color: #bfbfbf;
+input[type="date"]:focus {
+  outline: 2px solid var(--nasa-blue-bright);
+  outline-offset: 1px;
 }
 
-/* Stack horizontally on wider screens */
+.primary-button {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--white);
+  background-color: var(--nasa-red);
+  border: none;
+  border-radius: 4px;
+  padding: 12px 24px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.2s ease;
+}
+
+.primary-button:hover {
+  background-color: var(--nasa-red-dark);
+}
+
+.primary-button:focus-visible {
+  outline: 3px solid var(--nasa-blue-bright);
+  outline-offset: 2px;
+}
+
+.primary-button:disabled {
+  background-color: var(--gray);
+  cursor: wait;
+}
+
+/* Put the inputs and button in one row on wider screens */
 @media (min-width: 600px) {
   .filters {
     flex-direction: row;
-    padding: 0;
+    align-items: flex-end;
   }
-  
-  input[type="date"],
-  button {
+
+  .field {
+    flex: 1;
+  }
+
+  .primary-button {
     width: auto;
   }
 }
 
-/* Gallery flex container */
+/* =========================================================
+   LevelUp: "Did You Know?" fact
+   ========================================================= */
+.fact-card {
+  background-color: var(--nasa-blue);
+  color: var(--white);
+  border-radius: 6px;
+  padding: 18px 22px;
+  margin-bottom: 10px;
+}
+
+.fact-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--nasa-blue-light);
+  margin-bottom: 6px;
+}
+
+.fact-text {
+  font-size: 17px;
+}
+
+/* =========================================================
+   Gallery
+   ========================================================= */
 .gallery {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  padding: 20px;
+  padding: 20px 0;
   justify-content: center;
 }
 
-/* Gallery items */
+/* Each gallery item is a button so it works with a keyboard too */
 .gallery-item {
   flex: 1 1 100%;  /* full width by default */
   min-width: 280px;
   max-width: 500px;
-  background: white;
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  overflow: hidden;
   display: flex;
   flex-direction: column;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  background-color: var(--white);
+  border: none;
+  border-radius: 6px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.gallery-item:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
+}
+
+.gallery-item:focus-visible {
+  outline: 3px solid var(--nasa-blue-bright);
+  outline-offset: 2px;
 }
 
 /* Three columns on wider screens */
@@ -117,28 +268,267 @@ button:hover {
   }
 }
 
-.gallery-item img {
+/* The frame hides the edges of the image when it zooms */
+.media-frame {
+  position: relative;
+  display: block;
   width: 100%;
   height: 200px;
-  object-fit: cover;
+  overflow: hidden;
   border-radius: 4px;
+  background-color: var(--nasa-blue-darkest);
 }
 
-.gallery-item p {
-  margin-top: 10px;
-  padding: 5px;
-  font-size: 14px;
+.media-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
 }
 
-/* Placeholder content */
+/* LevelUp: hover zoom */
+.gallery-item:hover .media-frame img,
+.gallery-item:focus-visible .media-frame img {
+  transform: scale(1.08);
+}
+
+/* Shown when a video has no thumbnail or an image fails to load */
+.media-fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 100%;
+  color: var(--white);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: radial-gradient(circle at 30% 30%, var(--nasa-blue) 0%, var(--nasa-blue-darkest) 70%);
+}
+
+.media-fallback-icon {
+  font-size: 40px;
+}
+
+/* "VIDEO" tag on video entries */
+.media-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: var(--nasa-red);
+  color: var(--white);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 3px;
+}
+
+.card-text {
+  display: block;
+  padding: 12px 5px 5px;
+}
+
+.card-date {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.card-title {
+  display: block;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 1.3;
+  margin-top: 4px;
+}
+
+/* Placeholder, loading and error messages */
 .placeholder {
   flex: 1 1 100%;
   text-align: center;
   padding: 40px;
-  color: #666;
+  color: var(--gray);
 }
 
 .placeholder-icon {
   font-size: 48px;
   margin-bottom: 20px;
+}
+
+.loading .placeholder-icon {
+  display: inline-block;
+  animation: spin 1.2s linear infinite;
+}
+
+.placeholder-error {
+  color: var(--nasa-red-dark);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================================
+   Modal
+   ========================================================= */
+.modal {
+  border: none;
+  border-radius: 8px;
+  padding: 0;
+  width: min(900px, 92vw);
+  max-height: 90vh;
+  overflow-y: auto;
+  margin: auto;
+  background-color: var(--white);
+  color: var(--text);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.modal::backdrop {
+  background-color: rgba(6, 31, 74, 0.85);
+}
+
+.modal-inner {
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.92);
+  color: var(--text);
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.modal-close:hover {
+  background-color: var(--nasa-red);
+  color: var(--white);
+}
+
+.modal-close:focus-visible {
+  outline: 3px solid var(--nasa-blue-bright);
+  outline-offset: 2px;
+}
+
+.modal-media {
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-media img,
+.modal-media video {
+  display: block;
+  max-width: 100%;
+  max-height: 65vh;
+  object-fit: contain;
+}
+
+/* Keeps embedded videos in a 16:9 shape */
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.modal-media .media-fallback {
+  height: 260px;
+}
+
+.modal-details {
+  padding: 24px 28px 28px;
+}
+
+.modal-date {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.modal-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 1.2;
+  margin: 6px 0 14px;
+}
+
+.modal-explanation {
+  font-size: 16px;
+  color: var(--gray-dark);
+}
+
+.modal-credit {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--gray);
+  margin-top: 16px;
+}
+
+.modal-link {
+  display: inline-block;
+  margin-top: 16px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--white);
+  background-color: var(--nasa-red);
+  text-decoration: none;
+  padding: 10px 18px;
+  border-radius: 4px;
+}
+
+.modal-link:hover {
+  background-color: var(--nasa-red-dark);
+}
+
+/* =========================================================
+   Footer
+   ========================================================= */
+.site-footer {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--gray);
+  padding: 20px 20px 40px;
+}
+
+/* Turn off animations for people who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
 }
